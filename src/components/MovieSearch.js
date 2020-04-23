@@ -7,7 +7,14 @@ const movieSearch = props => {
   return (
     <>
       <Layout>
-        <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
+        <Header
+          style={{
+            position: "fixed",
+            zIndex: 1,
+            width: "100%",
+            height: "6.5rem"
+          }}
+        >
           <Search
             placeholder="Search a movie..."
             style={{ height: "4rem", width: "40rem", paddingTop: "1.5rem" }}

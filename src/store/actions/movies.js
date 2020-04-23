@@ -1,5 +1,6 @@
 import * as ACTIONS from "./actionTypes";
-import axiosInstance from "../../utils/axios";
+import axios from "../../utils/axios";
+import endpoints from "../../utils/endpoints";
 
 export const fetchMoviesFailure = error => {
   return {
@@ -7,16 +8,18 @@ export const fetchMoviesFailure = error => {
     error
   };
 };
-export const fetchMoviesSuccess = data => {
+export const fetchMoviesSuccess = moviesData => {
   return {
     type: ACTIONS.FETCH_MOVIES_SUCCESS,
-    data
+    moviesData
   };
 };
 
 export const fetchMovies = () => {
-  const moviesData = axiosInstance.getRequest(url);
-  return {
-    type: ACTIONS.FETCH_MOVIES
+  return dispatch => {
+    axios
+      .get(endpoints.movieList)
+      .then(response => dispatch(fetchMoviesSuccess(response.data)))
+      .catch(error => dispatch(fetchMoviesFailure(error.response)));
   };
 };
