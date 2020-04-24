@@ -23,3 +23,10 @@ export const fetchMovies = () => {
       .catch(error => dispatch(fetchMoviesFailure(error.response)));
   };
 };
+
+export const searchMovies = searchText => {
+  return {
+    type: ACTIONS.SEARCH_MOVIES,
+    searchText
+  };
+};

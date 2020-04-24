@@ -18,7 +18,7 @@ const movieSearch = props => {
           <Search
             placeholder="Search a movie..."
             style={{ height: "4rem", width: "40rem", paddingTop: "1.5rem" }}
-            onSearch={value => console.log(value)}
+            onKeyUp={value => props.search(value.target.value)}
             enterButton
           />
         </Header>
