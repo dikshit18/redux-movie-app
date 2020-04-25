@@ -1,30 +1,28 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from "react";
-import endpoints from "../utils/endpoints";
+import constants from "../utils/constants";
 import styled from "styled-components";
-
-const Poster = props => {
-  const Container = styled.div`
-    position: "relative";
-    text-align: center;
-    color: white;
-    &:hover .poster {
-      -webkit-filter: brightness(50%);
-      transition: all 0.5s ease;
-    }
-    &:hover .title {
-      display: block;
-    }
-  `;
-  const Info = styled.div`
-    position: absolute;
-    bottom: 3rem;
-    left: 1rem;
-    font-size: 3vw;
-    display: none;
-    font-weight: bold;
-  `;
-
+const Container = styled.div`
+  position: "relative";
+  text-align: center;
+  color: white;
+  &:hover .poster {
+    -webkit-filter: brightness(50%);
+    transition: all 0.5s ease;
+  }
+  &:hover .title {
+    display: block;
+  }
+`;
+const Info = styled.div`
+  position: absolute;
+  bottom: 3rem;
+  left: 1rem;
+  font-size: 3vw;
+  display: none;
+  font-weight: bold;
+`;
+const poster = props => {
   return (
     <>
       <Container>
@@ -34,7 +32,7 @@ const Poster = props => {
             maxWidth: "100%",
             maxHeight: "100%"
           }}
-          src={`${endpoints.movieBaner}${props.poster}`}
+          src={`${constants.movieBaner}${props.poster}`}
         />
         <Info className="title">{props.title}</Info>
       </Container>
@@ -42,4 +40,4 @@ const Poster = props => {
   );
 };
 
-export default Poster;
+export default poster;

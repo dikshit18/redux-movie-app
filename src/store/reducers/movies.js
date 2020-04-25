@@ -5,13 +5,15 @@ const initialState = {
   searchedMovies: []
 };
 
-export const reducer = (state = initialState, action) => {
+export const movieReducer = (state = initialState, action) => {
   switch (action.type) {
+    //Negative cases left to handle now
     case ACTIONS.FETCH_MOVIES_SUCCESS:
-      return { ...state, moviesData: action.moviesData.results };
+      const moviesData = state.moviesData.concat(action.moviesData.results);
+      return { ...state, moviesData };
     case ACTIONS.SEARCH_MOVIES:
       const updatedMovies = state.moviesData.filter(element =>
-        element.original_title.includes(action.searchText)
+        element.title.toLowerCase().includes(action.searchText.toLowerCase())
       );
       return {
         ...state,

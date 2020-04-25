@@ -2,7 +2,8 @@ import React from "react";
 import "antd/dist/antd.css";
 import { Row, Col } from "antd";
 import Poster from "./Poster";
-const MovieList = props => {
+import { Link } from "react-router-dom";
+const movieList = props => {
   return (
     <>
       <Row>
@@ -10,10 +11,19 @@ const MovieList = props => {
           props.movies.map(movie => {
             return (
               <Col key={movie.id} span={6}>
-                <Poster
-                  poster={movie.poster_path}
-                  title={movie.original_title}
-                />
+                <Link
+                  to={{
+                    pathname: `/movies/${movie.id}`,
+                    state: {
+                      movie
+                    }
+                  }}
+                >
+                  <Poster
+                    poster={movie.poster_path}
+                    title={movie.original_title}
+                  />
+                </Link>
               </Col>
             );
           })}
@@ -22,4 +32,4 @@ const MovieList = props => {
   );
 };
 
-export default MovieList;
+export default movieList;

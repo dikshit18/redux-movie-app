@@ -3,10 +3,30 @@ import { connect } from "react-redux";
 import { fetchMovies, searchMovies } from "../store/actions";
 import MovieSearch from "../components/MovieSearch";
 import MovieList from "../components/MovieList";
+
 class Movies extends Component {
   constructor(props) {
     super(props);
-    props.onFetchMovies();
+    this.state = {
+      pageNumber: 1
+    };
+    props.onFetchMovies(this.state.pageNumber);
+  }
+
+  componentWillMount() {
+    this.scrollListener = window.addEventListener("scroll", e => {
+      this.trackScrolling();
+    });
+  }
+  trackScrolling() {
+    const element = document.getElementById("root");
+    if (element.getBoundingClientRect().bottom <= window.innerHeight) {
+      console.log("Difference....", window.innerHeight);
+      let pageNumber = this.state.pageNumber;
+      pageNumber++;
+      console.log(pageNumber);
+      this.setState({ pageNumber }, () => this.props.onFetchMovies(pageNumber));
+    }
   }
 
   render() {
@@ -15,11 +35,16 @@ class Movies extends Component {
         <MovieSearch
           search={searchText => this.props.onMoviesSearch(searchText)}
         />
-        <div style={{ position: "relative", top: "6.5rem" }}>
+        <div
+          style={{
+            position: "relative",
+            top: "6.5rem"
+          }}
+        >
           <MovieList
             movies={
-              this.props.searchText
-                ? this.props.searchMovies
+              this.props.searchText && this.props.searchText !== ""
+                ? this.props.searchedMovies
                 : this.props.moviesData
             }
           />
@@ -30,16 +55,15 @@ class Movies extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
-    moviesData: state.moviesData,
-    searchText: state.searchText,
-    searchedMovies: state.searchedMovies
+    moviesData: state.movies.moviesData,
+    searchText: state.movies.searchText,
+    searchedMovies: state.movies.searchedMovies
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchMovies: () => dispatch(fetchMovies()),
+    onFetchMovies: pageNumber => dispatch(fetchMovies(pageNumber)),
     onMoviesSearch: searchText => dispatch(searchMovies(searchText))
   };
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout, Input } from "antd";
+import { Layout, Input, Row, Col } from "antd";
 import "antd/dist/antd.css";
 const { Header } = Layout;
 const { Search } = Input;
@@ -15,12 +15,16 @@ const movieSearch = props => {
             height: "6.5rem"
           }}
         >
-          <Search
-            placeholder="Search a movie..."
-            style={{ height: "4rem", width: "40rem", paddingTop: "1.5rem" }}
-            onKeyUp={value => props.search(value.target.value)}
-            enterButton
-          />
+          <Row>
+            <Col md={8} lg={8} xs={24} sm={24}>
+              <Search
+                placeholder="Search a movie..."
+                style={{ paddingTop: "1.5rem" }}
+                onKeyUp={value => props.search(value.target.value)}
+                enterButton
+              />
+            </Col>
+          </Row>
         </Header>
       </Layout>
     </>

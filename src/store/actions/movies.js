@@ -1,6 +1,6 @@
 import * as ACTIONS from "./actionTypes";
 import axios from "../../utils/axios";
-import endpoints from "../../utils/endpoints";
+import constants from "../../utils/constants";
 
 export const fetchMoviesFailure = error => {
   return {
@@ -15,10 +15,10 @@ export const fetchMoviesSuccess = moviesData => {
   };
 };
 
-export const fetchMovies = () => {
+export const fetchMovies = pageNumber => {
   return dispatch => {
     axios
-      .get(endpoints.movieList)
+      .get(constants.movieList + pageNumber)
       .then(response => dispatch(fetchMoviesSuccess(response.data)))
       .catch(error => dispatch(fetchMoviesFailure(error.response)));
   };
