@@ -11,17 +11,21 @@ class Movies extends Component {
       pageNumber: 1
     };
     props.onFetchMovies(this.state.pageNumber);
-  }
-
-  componentWillMount() {
     this.scrollListener = window.addEventListener("scroll", e => {
       this.trackScrolling();
     });
   }
+
+  //Known issue of Memory Leak, to be corrected
+  componentWillUnmount() {
+    console.log("I am here");
+    // window.removeEventListener("scroll", this.scrollListener, e =>
+    //   console.log("----", e)
+    // );
+  }
   trackScrolling() {
     const element = document.getElementById("root");
     if (element.getBoundingClientRect().bottom <= window.innerHeight) {
-      console.log("Difference....", window.innerHeight);
       let pageNumber = this.state.pageNumber;
       pageNumber++;
       console.log(pageNumber);

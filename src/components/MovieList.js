@@ -10,7 +10,7 @@ const movieList = props => {
         {props.movies &&
           props.movies.map(movie => {
             return (
-              <Col key={movie.id} span={6}>
+              <Col key={movie.id + Math.random()} span={6}>
                 <Link
                   to={{
                     pathname: `/movies/${movie.id}`,

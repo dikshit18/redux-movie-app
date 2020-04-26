@@ -12,6 +12,7 @@ export const movieReducer = (state = initialState, action) => {
       const moviesData = state.moviesData.concat(action.moviesData.results);
       return { ...state, moviesData };
     case ACTIONS.SEARCH_MOVIES:
+      console.log("-----", action);
       const updatedMovies = state.moviesData.filter(element =>
         element.title.toLowerCase().includes(action.searchText.toLowerCase())
       );

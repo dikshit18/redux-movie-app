@@ -7,7 +7,6 @@ import { HeartTwoTone } from "@ant-design/icons";
 import { Layout, PageHeader, Tag, Typography, Row, Col } from "antd";
 import constants from "../utils/constants";
 import { fetchTrailerURL } from "../store/actions";
-import trailer from "../components/Trailer";
 
 const { Paragraph } = Typography;
 class MovieDetails extends Component {
